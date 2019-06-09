@@ -755,7 +755,7 @@ python              3.7.3-slim-stretch   ca7f9e245002        4 weeks ago        
 [root@centos7 my_folder]#
 ```
 
-![]("images/image01.png)
+![](images/image01.png)
 
 
 > **Table of contents**
