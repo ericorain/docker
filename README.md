@@ -10,7 +10,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 
 >  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
-``` bash
+``` shell
 [root@centos7 ~]# yum install -y yum-utils device-mapper-persistent-data lvm2
 Modules complémentaires chargés : fastestmirror, langpacks
 Loading mirror speeds from cached hostfile
@@ -27,7 +27,7 @@ Rien à faire
 > sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 
-```
+``` shell
 [root@centos7 ~]# yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 Modules complémentaires chargés : fastestmirror, langpacks
 adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
@@ -42,7 +42,7 @@ Here is the installation command to have Docer working on the Linux host.
 
 > sudo yum install docker-ce docker-ce-cli containerd.io
 
-```
+``` shell
 [root@centos7 ~]# sudo yum install docker-ce docker-ce-cli containerd.io
 Modules complémentaires chargés : fastestmirror, langpacks
 Loading mirror speeds from cached hostfile
@@ -93,7 +93,7 @@ If needed Docker can be uninstalled. Removing forgotten images/containers might 
 
 > yum remove docker-ce
 
-```
+``` shell
 [root@centos7 ~]# yum remove docker-ce
 Modules complémentaires chargés : fastestmirror, langpacks
 Résolution des dépendances
@@ -141,7 +141,7 @@ Let's check if the service is running.
 
 > systemctl status docker
 
-```
+``` shell
 [root@centos7 ~]# systemctl status docker
 ? docker.service - Docker Application Container Engine
    Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
