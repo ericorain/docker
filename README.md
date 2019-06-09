@@ -419,7 +419,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 
 There 3 ways to run a container from an image. For the purpose of this demonstration the alpine linux os will be used.
 
-Important: when the container is create it is **staying** in the list of the active (docker container ls) or non-active (docker container ls --all) containers.
+Important: when the container is created it is **staying** in the list of the active (docker container ls) or non-active (docker container ls --all) containers.
 
 ### 5.1 Running and exiting immediately
 
@@ -460,7 +460,7 @@ c983bea32e29        alpine              "/bin/sh"           24 seconds ago      
 
 How about if we want to go back to the container?
 
-Here is how to do that:
+Here is how to do it:
 
 > docker attach *container_id*
 
@@ -503,8 +503,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 [root@centos7 ~]#
 ```
 
-
-
 ### 5.3 Running and deleting immediately the container
 
 > docker run --rm alpine echo hi everyone
@@ -517,8 +515,90 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 [root@centos7 ~]#
 ```
 
-
-
-
 ## 6. Creating a Docker image
 
+This part covers:
+- the creation of a docker image made with a simple python script. The script uses a simple HTTP server.
+- the launching of the docker image changing the HTTP server TCP port.
+
+### Step 1: Creation of the working folder 
+
+``` shell
+[root@centos7 tmp]# mkdir my_folder
+[root@centos7 tmp]# cd my_folder
+[root@centos7 my_folder]#
+
+```
+
+### Step 2: Creation of the python script
+
+Create a folder "src", go into it. Next create a file called "app.py". Afterward go back to the parent folder.
+
+**app.py:**
+
+``` shell
+from flask import Flask
+import os
+import socket
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+
+    html = "<h3>Hello {name}!</h3>" \
+           "<b>Hostname:</b> {hostname}<br/>"
+    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname())
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
+```
+
+
+``` shell
+[root@centos7 my_folder]# mkdir src
+[root@centos7 my_folder]# cd src
+[root@centos7 src]# vi app.py
+[root@centos7 src]# cat app.py
+from flask import Flask
+import os
+import socket
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+
+    html = "<h3>Hello {name}!</h3>" \
+           "<b>Hostname:</b> {hostname}<br/>"
+    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname())
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
+[root@centos7 src]# cd ..
+[root@centos7 my_folder]#
+
+```
+
+
+### Step 3: Creation of the python external dependancies file
+
+That file lists all the python script dependancies (libraries).
+
+The content of "requirements.txt" file is:
+
+**requirements.txt:**
+``` shell
+Flask
+```
+
+``` shell
+[root@centos7 my_folder]# vi requirements.txt
+[root@centos7 my_folder]# cat requirements.txt
+Flask
+[root@centos7 my_folder]#
+```
+
+### Step 3: Creation of the 
