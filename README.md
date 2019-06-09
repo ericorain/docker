@@ -10,7 +10,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 
 >  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
-```
+``` bash
 [root@centos7 ~]# yum install -y yum-utils device-mapper-persistent-data lvm2
 Modules complémentaires chargés : fastestmirror, langpacks
 Loading mirror speeds from cached hostfile
