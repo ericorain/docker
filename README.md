@@ -306,7 +306,7 @@ Product License: Community Engine
 [root@centos7 ~]#
 ```
 
-### 4.23 List images
+### 4.3 List images
 
 > docker images
 
@@ -322,3 +322,30 @@ hello-world         latest              fce289e99eb9        5 months ago        
 [root@centos7 ~]#
 ```
 
+Images and containers are stored in:
+> /var/lib/docker
+
+Example with the hello world image:
+
+``` shell
+[root@centos7 ~]# find /var/lib/docker/ | grep hello
+/var/lib/docker/overlay2/689d95fd8f27e625ca277256ae3e33a54b921d5d5fd7271a46bc1c45298bbfb2/diff/hello
+[root@centos7 ~]#
+```
+
+### 4.4 List containers
+
+> docker container ls
+
+or (all containers including exited containers)
+
+> docker container ls --all
+
+``` shell
+[root@centos7 ~]# docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@centos7 ~]# docker container ls --all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+bd64f9376534        hello-world         "/hello"            18 minutes ago      Exited (0) 18 minutes ago                       compassionate_rubin
+[root@centos7 ~]#
+```
