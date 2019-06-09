@@ -2,6 +2,35 @@
 
 Here are a couple of commands to install Docker Community Edition (CE) on Centos 7.
 
+> **Table of contents**
+> 
+> * [1. Install Docker CE](#1.-Install-Docker-CE)
+>   * [1.1 Repository update](#1.1-Repository-update)
+>   * [1.2 Docker installation command](#1.2-Docker-installation-command)
+> * [2. Uninstall Docker CE](#2.-Uninstall-Docker-CE)
+> * [3. Testing Docker is running](#3.-Testing-Docker-is-running)
+> * [4. Usefull commands](#4.-Usefull-commands)
+>   * [4.1 Get Docker currently installed version](#4.1-Get-Docker-currently-installed-version)
+>   * [4.2 Get Docker information (number of images, containers, etc.)](#4.2-Get-Docker-information-(number-of-images,-containers,-etc.))
+>   * [4.3 List images](#4.3-List-images)
+>   * [4.4 List containers](#4.4-List-containers)
+>   * [4.5 Checking running containers](#4.5-Checking-running-containers)
+>   * [4.6 Import a Docker image](#4.6-Import-a-Docker-image)
+>   * [4.7 Delete a container](#4.7-Delete-a-container)
+>   * [4.8 Delete an image](#4.8-Delete-an-image)
+> * [5. Running a container](#5.-Running-a-container)
+>   * [5.1 Running and exiting immediately](#5.1-Running-and-exiting-immediately)
+>   * [5.2 Running and keep it running](#5.2-Running-and-keep-it-running)
+>   * [5.3 Running and deleting immediately the container](#5.3-Running-and-deleting-immediately-the-container)
+> * [6. Creating a Docker image](#6.-Creating-a-Docker-image)
+>   * [Step 1: Creation of the working folder](#Step-1:-Creation-of-the-working-folder)
+>   * [Step 2: Creation of the python script](#Step-2:-Creation-of-the-python-script)
+>   * [Step 3: Creation of the python external python libraries](#Step-3:-Creation-of-the-python-external-python-libraries)
+>   * [Step 4: Creation of the container definition file](#Step-4:-Creation-of-the-container-definition-file)
+>   * [Step 5: Building the image](#Step-5:-Building-the-image)
+>   * [Step 6: Running the image](#Step-6:-Running-the-image)
+
+
 ## 1. Install Docker CE
 
 ### 1.1 Repository update
@@ -87,7 +116,7 @@ Terminé !
 [root@centos7 ~]#
 ```
 
-## 2. Uninstall docker CE
+## 2. Uninstall Docker CE
 
 If needed Docker can be uninstalled. Removing forgotten images/containers might be done alos (not described here).
 
@@ -747,21 +776,28 @@ The image is going to be run with a port redirection (TCP 4000).
 
 > docker run -p 4000:80 mypythonscript
 
+Here someone connected once then a Ctrl+C.
+
 ``` shell
-[root@centos7 my_folder]# docker images
-REPOSITORY          TAG                  IMAGE ID            CREATED             SIZE
-mypythonscript      latest               ceb5496c91ba        8 seconds ago       153MB
-python              3.7.3-slim-stretch   ca7f9e245002        4 weeks ago         143MB
+[root@centos7 my_folder]# docker run -p 4000:80 mypythonscript
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+10.0.2.2 - - [09/Jun/2019 16:51:35] "GET / HTTP/1.1" 200 -
+^C[root@centos7 my_folder]#
+^C[root@centos7 my_folder]#
+^C[root@centos7 my_folder]#
+[root@centos7 my_folder]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+5ef84f50b5c5        mypythonscript      "python app.py"     13 minutes ago      Exited (0) 7 minutes ago                       awesome_brahmagupta
 [root@centos7 my_folder]#
 ```
+
+The user connected get that result on his Web browser:
 
 ![](images/image01.png)
 
 
-> **Table of contents**
-> 
-> * [Test](#test)
->   * [Partial data dump](#partial-data-dump)
->     - [Technical details](#technical-details)
->   * [Full data dump](#full-data-dump)
->   * [Sanity checks](#sanity-checks)
