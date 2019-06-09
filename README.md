@@ -2,9 +2,9 @@
 
 Here are a couple of commands to install Docker Community Edition (CE) on Centos 7.
 
-## Install Docker CE
+## 1. Install Docker CE
 
-### 1. Repository update
+### 1.1 Repository update
 
 2 commands to use to update the repository first.
 
@@ -36,7 +36,7 @@ repo saved to /etc/yum.repos.d/docker-ce.repo
 [root@centos7 ~]#
 ```
 
-### 2. Now program installation
+### 1.2 Docker installation command
 
 Here is the installation command to have Docer working on the Linux host.
 
@@ -87,7 +87,9 @@ Terminé !
 [root@centos7 ~]#
 ```
 
-## Uninstall docker CE
+## 2. Uninstall docker CE
+
+If needed Docker can be uninstalled. Removing forgotten images/containers might be done alos (not described here).
 
 > yum remove docker-ce
 
@@ -130,5 +132,65 @@ Supprimé :
   docker-ce.x86_64 3:18.09.6-3.el7
 
 Terminé !
+[root@centos7 ~]#
+```
+
+## 3. Testing Docker is running
+
+Let's check if the service is running.
+
+> systemctl status docker
+
+```
+[root@centos7 ~]# systemctl status docker
+? docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: https://docs.docker.com
+
+juin 09 07:02:48 centos7 dockerd[3315]: time="2019-06-09T07:02:48.554055018+02:00" level=info msg="Loading conta...art."
+juin 09 07:03:05 centos7 dockerd[3315]: time="2019-06-09T07:03:05.767508668+02:00" level=info msg="Default bridg...ress"
+juin 09 07:03:07 centos7 dockerd[3315]: time="2019-06-09T07:03:07.658506716+02:00" level=info msg="Loading conta...one."
+juin 09 07:03:08 centos7 dockerd[3315]: time="2019-06-09T07:03:08.572303542+02:00" level=info msg="Docker daemon....09.6
+juin 09 07:03:08 centos7 dockerd[3315]: time="2019-06-09T07:03:08.572588513+02:00" level=info msg="Daemon has co...tion"
+juin 09 07:03:08 centos7 systemd[1]: Started Docker Application Container Engine.
+juin 09 07:03:08 centos7 dockerd[3315]: time="2019-06-09T07:03:08.928673786+02:00" level=info msg="API listen on...sock"
+juin 09 11:00:42 centos7 systemd[1]: Stopping Docker Application Container Engine...
+juin 09 11:00:42 centos7 dockerd[3315]: time="2019-06-09T11:00:42.909296195+02:00" level=info msg="Processing si...ted'"
+juin 09 11:00:42 centos7 systemd[1]: Stopped Docker Application Container Engine.
+Hint: Some lines were ellipsized, use -l to show in full.
+[root@centos7 ~]#
+```
+
+-> By default Docker deamon is not running.
+
+Let's make it run.
+
+> systemctl start docker
+
+``` shell
+[root@centos7 ~]# systemctl start docker
+[root@centos7 ~]# systemctl status docker
+? docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: active (running) since dim. 2019-06-09 11:16:59 CEST; 4s ago
+     Docs: https://docs.docker.com
+ Main PID: 14421 (dockerd)
+    Tasks: 12
+   Memory: 33.1M
+   CGroup: /system.slice/docker.service
+           mq14421 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+juin 09 11:16:57 centos7 dockerd[14421]: time="2019-06-09T11:16:57.614024431+02:00" level=info msg="pickfirstBal...=grpc
+juin 09 11:16:57 centos7 dockerd[14421]: time="2019-06-09T11:16:57.661662965+02:00" level=info msg="[graphdriver...lay2"
+juin 09 11:16:57 centos7 dockerd[14421]: time="2019-06-09T11:16:57.673014729+02:00" level=info msg="Graph migrat...onds"
+juin 09 11:16:57 centos7 dockerd[14421]: time="2019-06-09T11:16:57.674449115+02:00" level=info msg="Loading cont...art."
+juin 09 11:16:58 centos7 dockerd[14421]: time="2019-06-09T11:16:58.666087357+02:00" level=info msg="Default brid...ress"
+juin 09 11:16:58 centos7 dockerd[14421]: time="2019-06-09T11:16:58.960505346+02:00" level=info msg="Loading cont...one."
+juin 09 11:16:58 centos7 dockerd[14421]: time="2019-06-09T11:16:58.995057112+02:00" level=info msg="Docker daemo....09.6
+juin 09 11:16:58 centos7 dockerd[14421]: time="2019-06-09T11:16:58.995247867+02:00" level=info msg="Daemon has c...tion"
+juin 09 11:16:59 centos7 dockerd[14421]: time="2019-06-09T11:16:59.023290431+02:00" level=info msg="API listen o...sock"
+juin 09 11:16:59 centos7 systemd[1]: Started Docker Application Container Engine.
+Hint: Some lines were ellipsized, use -l to show in full.
 [root@centos7 ~]#
 ```
