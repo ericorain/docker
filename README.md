@@ -29,7 +29,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 >   * [Step 4: Creation of the container definition file](#Step-4:-Creation-of-the-container-definition-file)
 >   * [Step 5: Building the image](#Step-5:-Building-the-image)
 >   * [Step 6: Running the image](#Step-6:-Running-the-image)
->   * [1.test](#1-test)
+>   * [1. test](#1-test)
 
 
 ## 1. Install Docker CE
@@ -802,4 +802,4 @@ The user connected get that result on his Web browser:
 ![](images/image01.png)
 
 
-## 1 test
+## 1. test
