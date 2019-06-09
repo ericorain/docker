@@ -350,7 +350,26 @@ bd64f9376534        hello-world         "/hello"            18 minutes ago      
 [root@centos7 ~]#
 ```
 
-### 4.5 Delete a container
+### 4.5 Import a Docker image
+
+An online image of the alpine linux distribution is download to Docker locally.
+
+> docker pull alpine
+
+``` shell
+[root@centos7 ~]# docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+e7c96db7181b: Pull complete
+Digest: sha256:769fddc7cc2f0a1c35abb2f91432e8beecf83916c421420e6a6da9f8975464b6
+Status: Downloaded newer image for alpine:latest
+[root@centos7 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+alpine              latest              055936d39205        4 weeks ago         5.53MB
+[root@centos7 ~]#
+```
+
+### 4.6 Delete a container
 
 > docker container rm *container_id*
 
@@ -365,7 +384,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 [root@centos7 ~]#
 ```
 
-### 4.6 Delete an image
+### 4.7 Delete an image
 
 > docker image rm *image_id*
 
@@ -382,3 +401,64 @@ Deleted: sha256:af0b15c8625bb1938f1d7b17081031f649fd14e6b233688eea3c5483994a66a3
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 [root@centos7 ~]#
 ```
+
+## 5. Running a container
+
+ An image is used to create an container. A container is considered as an instance of the image.
+
+There 3 ways to run a container from an image. For the purpose of this demonstration the alpine linux os will be used.
+
+Important: when the container is create it is **staying** in the list of the active (docker container ls) or non-active (docker container ls --all) containers.
+
+### 5.1 Running and exiting immediately
+
+Please note that the container is existing but **stays** in the list of the container; it is not erased after creation even though the execution of the program is ended.
+
+> docker run alpine echo hi everyone
+
+``` shell
+[root@centos7 ~]# docker run alpine echo hi everyone
+hi everyone
+[root@centos7 ~]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                      PORTS               NAMES
+10d038897317        alpine              "echo hi everyone"   11 seconds ago      Exited (0) 10 seconds ago                       goofy_mirzakhani
+[root@centos7 ~]#
+```
+
+### 5.2 Running and keep it running
+
+The idea is to run a Docker container and using it then leaving the container. The container is then still running as a processus. Ctrl+P then Ctrl+Q is used to  let the container running in background.
+
+Parameter -it allows container to run as an interactive process.
+
+Please not that "docker container ls" is used and not "-all" version.
+
+Later ont the command "docker container stop c983bea32e29" will be needed t stop the container.
+
+> docker run -it alpine /bin/sh
+
+``` shell
+[root@centos7 ~]# docker run -it alpine /bin/sh
+/ # echo hi everyone
+hi everyone
+/ # [root@centos7 ~]# docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c983bea32e29        alpine              "/bin/sh"           24 seconds ago      Up 23 seconds                           musing_mclean
+[root@centos7 ~]#
+```
+
+### 5.3 Running and deleting immediately the container
+
+> docker run --rm alpine echo hi everyone
+
+``` shell
+[root@centos7 ~]# docker run --rm alpine echo hi everyone
+hi everyone
+[root@centos7 ~]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@centos7 ~]#
+```
+
+
+## 6. Creating a Docker image
+
