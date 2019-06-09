@@ -583,9 +583,9 @@ if __name__ == "__main__":
 ```
 
 
-### Step 3: Creation of the python external dependancies file
+### Step 3: Creation of the python external python libraries
 
-That file lists all the python script dependancies (libraries).
+That file lists all the python script libraries.
 
 The content of "requirements.txt" file is:
 
@@ -601,4 +601,167 @@ Flask
 [root@centos7 my_folder]#
 ```
 
-### Step 3: Creation of the 
+### Step 4: Creation of the container definition file
+
+The "Dockerfile" will be used to define how to build the image.
+
+Create a "Dockerfile" at the root of th eworking directory.
+
+**Dockerfile:**
+
+``` shell
+# Use a reduced image of Python
+FROM python:3.7.3-slim-stretch
+
+# Copy the requirements.txt file
+COPY requirements.txt /
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r /requirements.txt
+
+# Copy the src directory contents into the container at /app
+COPY src/ /app
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
+
+
+``` shell
+[root@centos7 my_folder]# vi Dockerfile
+[root@centos7 my_folder]# cat Dockerfile
+# Use a reduced image of Python
+FROM python:3.7.3-slim-stretch
+
+# Copy the requirements.txt file
+COPY requirements.txt /
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r /requirements.txt
+
+# Copy the src directory contents into the container at /app
+COPY src/ /app
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+[root@centos7 my_folder]# 
+```
+
+File structure should be the following by now:
+
+``` shell
+[root@centos7 my_folder]# find .
+.
+./Dockerfile
+./requirements.txt
+./src
+./src/app.py
+[root@centos7 my_folder]#
+```
+
+### Step 5: Building the image
+
+> docker build --tag=mypythonscript .
+
+``` shell
+[root@centos7 my_folder]# docker build --tag=mypythonscript .
+Sending build context to Docker daemon  4.608kB
+Step 1/7 : FROM python:3.7.3-slim-stretch
+3.7.3-slim-stretch: Pulling from library/python
+743f2d6c1f65: Already exists
+977e13fc7449: Already exists
+de5f9e5af26b: Already exists
+0d27ddbe8383: Already exists
+228d55eb5a23: Already exists
+Digest: sha256:d11045cada89c0d1ebe3a8b0cd6c25d29fc300f9f2eb17bb24c5674e62b5ba58
+Status: Downloaded newer image for python:3.7.3-slim-stretch
+ ---> ca7f9e245002
+Step 2/7 : COPY requirements.txt /
+ ---> c6659411f62a
+Step 3/7 : RUN pip install -r /requirements.txt
+ ---> Running in 984a79431e3e
+Collecting Flask (from -r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/9a/74/670ae9737d14114753b8c8fdf2e8bd212a05d3b361ab15b44937dfd40985/Flask-1.0.3-py2.py3-none-any.whl (92kB)
+Collecting Jinja2>=2.10 (from Flask->-r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/1d/e7/fd8b501e7a6dfe492a433deb7b9d833d39ca74916fa8bc63dd1a4947a671/Jinja2-2.10.1-py2.py3-none-any.whl (124kB)
+Collecting itsdangerous>=0.24 (from Flask->-r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting Werkzeug>=0.14 (from Flask->-r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/9f/57/92a497e38161ce40606c27a86759c6b92dd34fcdb33f64171ec559257c02/Werkzeug-0.15.4-py2.py3-none-any.whl (327kB)
+Collecting click>=5.1 (from Flask->-r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/fa/37/45185cb5abbc30d7257104c434fe0b07e5a195a6847506c074527aa599ec/Click-7.0-py2.py3-none-any.whl (81kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.10->Flask->-r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/98/7b/ff284bd8c80654e471b769062a9b43cc5d03e7a615048d96f4619df8d420/MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl
+Installing collected packages: MarkupSafe, Jinja2, itsdangerous, Werkzeug, click, Flask
+Successfully installed Flask-1.0.3 Jinja2-2.10.1 MarkupSafe-1.1.1 Werkzeug-0.15.4 click-7.0 itsdangerous-1.1.0
+Removing intermediate container 984a79431e3e
+ ---> 39e29b2783b4
+Step 4/7 : COPY src/ /app
+ ---> 71c024023d62
+Step 5/7 : WORKDIR /app
+ ---> Running in 39b1f42b5ce9
+Removing intermediate container 39b1f42b5ce9
+ ---> 8295981e8457
+Step 6/7 : EXPOSE 80
+ ---> Running in 7c9bb950b930
+Removing intermediate container 7c9bb950b930
+ ---> 2d5af0303630
+Step 7/7 : CMD ["python", "app.py"]
+ ---> Running in 7f72973955bc
+Removing intermediate container 7f72973955bc
+ ---> ceb5496c91ba
+Successfully built ceb5496c91ba
+Successfully tagged mypythonscript:latest
+[root@centos7 my_folder]# docker images
+REPOSITORY          TAG                  IMAGE ID            CREATED             SIZE
+mypythonscript      latest               ceb5496c91ba        8 seconds ago       153MB
+python              3.7.3-slim-stretch   ca7f9e245002        4 weeks ago         143MB
+[root@centos7 my_folder]#
+```
+
+The image and the python image usefull for the creation of the image are stored in the image repository of Docker:
+
+``` shell
+[root@centos7 my_folder]# docker images
+REPOSITORY          TAG                  IMAGE ID            CREATED             SIZE
+mypythonscript      latest               ceb5496c91ba        8 seconds ago       153MB
+python              3.7.3-slim-stretch   ca7f9e245002        4 weeks ago         143MB
+[root@centos7 my_folder]#
+```
+
+### Step 6: Running the image
+
+The image is going to be run with a port redirection (TCP 4000).
+
+> docker run -p 4000:80 mypythonscript
+
+``` shell
+[root@centos7 my_folder]# docker images
+REPOSITORY          TAG                  IMAGE ID            CREATED             SIZE
+mypythonscript      latest               ceb5496c91ba        8 seconds ago       153MB
+python              3.7.3-slim-stretch   ca7f9e245002        4 weeks ago         143MB
+[root@centos7 my_folder]#
+```
+
+![]("images/image01.png)
+
+
+> **Table of contents**
+> 
+> * [Test](#test)
+>   * [Partial data dump](#partial-data-dump)
+>     - [Technical details](#technical-details)
+>   * [Full data dump](#full-data-dump)
+>   * [Sanity checks](#sanity-checks)
