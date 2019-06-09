@@ -350,7 +350,18 @@ bd64f9376534        hello-world         "/hello"            18 minutes ago      
 [root@centos7 ~]#
 ```
 
-### 4.5 Import a Docker image
+### 4.5 Checking running containers
+
+> docker ps -a
+
+``` shell
+[root@centos7 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+fcfd13a0d034        alpine              "/bin/sh"           2 minutes ago       Up 2 minutes                            frosty_albattani
+[root@centos7 ~]#
+```
+
+### 4.6 Import a Docker image
 
 An online image of the alpine linux distribution is download to Docker locally.
 
@@ -369,7 +380,7 @@ alpine              latest              055936d39205        4 weeks ago         
 [root@centos7 ~]#
 ```
 
-### 4.6 Delete a container
+### 4.7 Delete a container
 
 > docker container rm *container_id*
 
@@ -384,7 +395,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 [root@centos7 ~]#
 ```
 
-### 4.7 Delete an image
+### 4.8 Delete an image
 
 > docker image rm *image_id*
 
@@ -447,6 +458,53 @@ c983bea32e29        alpine              "/bin/sh"           24 seconds ago      
 [root@centos7 ~]#
 ```
 
+How about if we want to go back to the container?
+
+Here is how to do that:
+
+> docker attach *container_id*
+
+``` shell
+[root@centos7 ~]# docker run -it alpine /bin/sh
+/ # ping localhost
+PING localhost (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.101 ms
+64 bytes from 127.0.0.1: seq=1 ttl=64 time=0.112 ms
+64 bytes from 127.0.0.1: seq=2 ttl=64 time=0.113 ms
+64 bytes from 127.0.0.1: seq=3 ttl=64 time=0.112 ms
+64 bytes from 127.0.0.1: seq=4 ttl=64 time=0.119 ms
+64 bytes from 127.0.0.1: seq=5 ttl=64 time=0.110 ms
+64 bytes from 127.0.0.1: seq=6 ttl=64 time=0.109 ms
+[root@centos7 ~]#
+[root@centos7 ~]#
+[root@centos7 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+f7f44fc621cb        alpine              "/bin/sh"           26 seconds ago      Up 25 seconds                           musing_mclaren
+[root@centos7 ~]# docker attach f7f44fc621cb
+64 bytes from 127.0.0.1: seq=38 ttl=64 time=0.116 ms
+64 bytes from 127.0.0.1: seq=39 ttl=64 time=0.118 ms
+64 bytes from 127.0.0.1: seq=40 ttl=64 time=0.124 ms
+64 bytes from 127.0.0.1: seq=41 ttl=64 time=0.108 ms
+64 bytes from 127.0.0.1: seq=42 ttl=64 time=0.118 ms
+^C
+--- localhost ping statistics ---
+43 packets transmitted, 43 packets received, 0% packet loss
+round-trip min/avg/max = 0.101/0.110/0.127 ms
+/ # read escape sequence
+[root@centos7 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+f7f44fc621cb        alpine              "/bin/sh"           59 seconds ago      Up 58 seconds                           musing_mclaren
+[root@centos7 ~]# docker container stop f7f44fc621cb
+f7f44fc621cb
+[root@centos7 ~]# docker container rm f7f44fc621cb
+f7f44fc621cb
+[root@centos7 ~]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@centos7 ~]#
+```
+
+
+
 ### 5.3 Running and deleting immediately the container
 
 > docker run --rm alpine echo hi everyone
@@ -458,6 +516,8 @@ hi everyone
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 [root@centos7 ~]#
 ```
+
+
 
 
 ## 6. Creating a Docker image
