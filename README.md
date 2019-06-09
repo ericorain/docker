@@ -4,32 +4,31 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 
 > **Table of contents**
 > 
-> * [1. Install Docker CE](#1.-Install-Docker-CE)
->   * [1.1 Repository update](#1.1-Repository-update)
->   * [1.2 Docker installation command](#1.2-Docker-installation-command)
-> * [2. Uninstall Docker CE](#2.-Uninstall-Docker-CE)
-> * [3. Testing Docker is running](#3.-Testing-Docker-is-running)
-> * [4. Usefull commands](#4.-Usefull-commands)
->   * [4.1 Get Docker currently installed version](#4.1-Get-Docker-currently-installed-version)
->   * [4.2 Get Docker information (number of images, containers, etc.)](#4.2-Get-Docker-information-(number-of-images,-containers,-etc.))
->   * [4.3 List images](#4.3-List-images)
->   * [4.4 List containers](#4.4-List-containers)
->   * [4.5 Checking running containers](#4.5-Checking-running-containers)
->   * [4.6 Import a Docker image](#4.6-Import-a-Docker-image)
->   * [4.7 Delete a container](#4.7-Delete-a-container)
->   * [4.8 Delete an image](#4.8-Delete-an-image)
-> * [5. Running a container](#5.-Running-a-container)
->   * [5.1 Running and exiting immediately](#5.1-Running-and-exiting-immediately)
->   * [5.2 Running and keep it running](#5.2-Running-and-keep-it-running)
->   * [5.3 Running and deleting immediately the container](#5.3-Running-and-deleting-immediately-the-container)
-> * [6. Creating a Docker image](#6.-Creating-a-Docker-image)
->   * [Step 1: Creation of the working folder](#Step-1:-Creation-of-the-working-folder)
->   * [Step 2: Creation of the python script](#Step-2:-Creation-of-the-python-script)
->   * [Step 3: Creation of the python external python libraries](#Step-3:-Creation-of-the-python-external-python-libraries)
->   * [Step 4: Creation of the container definition file](#Step-4:-Creation-of-the-container-definition-file)
->   * [Step 5: Building the image](#Step-5:-Building-the-image)
->   * [Step 6: Running the image](#Step-6:-Running-the-image)
->   * [1. test](#1-test)
+> * [1. Install Docker CE](#1-Install-Docker-CE)
+>   * [1.1 Repository update](#11-Repository-update)
+>   * [1.2 Docker installation command](#12-Docker-installation-command)
+> * [2. Uninstall Docker CE](#2-Uninstall-Docker-CE)
+> * [3. Testing Docker is running](#3-Testing-Docker-is-running)
+> * [4. Usefull commands](#4-Usefull-commands)
+>   * [4.1 Get Docker currently installed version](#41-Get-Docker-currently-installed-version)
+>   * [4.2 Get Docker information (number of images, containers, etc.)](#42-Get-Docker-information-number-of-images-containers-etc)
+>   * [4.3 List images](#43-List-images)
+>   * [4.4 List containers](#44-List-containers)
+>   * [4.5 Checking running containers](#45-Checking-running-containers)
+>   * [4.6 Import a Docker image](#46-Import-a-Docker-image)
+>   * [4.7 Delete a container](#47-Delete-a-container)
+>   * [4.8 Delete an image](#48-Delete-an-image)
+> * [5. Running a container](#5-Running-a-container)
+>   * [5.1 Running and exiting immediately](#51-Running-and-exiting-immediately)
+>   * [5.2 Running and keep it running](#52-Running-and-keep-it-running)
+>   * [5.3 Running and deleting immediately the container](#53-Running-and-deleting-immediately-the-container)
+> * [6. Creating a Docker image](#6-Creating-a-Docker-image)
+>   * [Step 1: Creation of the working folder](#Step-1-Creation-of-the-working-folder)
+>   * [Step 2: Creation of the python script](#Step-2-Creation-of-the-python-script)
+>   * [Step 3: Creation of the python external python libraries](#Step-3-Creation-of-the-python-external-python-libraries)
+>   * [Step 4: Creation of the container definition file](#Step-4-Creation-of-the-container-definition-file)
+>   * [Step 5: Building the image](#Step-5-Building-the-image)
+>   * [Step 6: Running the image](#Step-6-Running-the-image)
 
 
 ## 1. Install Docker CE
@@ -801,5 +800,3 @@ The user connected get that result on his Web browser:
 
 ![](images/image01.png)
 
-
-## 1. test
