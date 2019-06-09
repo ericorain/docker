@@ -195,7 +195,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 [root@centos7 ~]#
 ```
 
-A way to check that Docker is working is to run the "hello world" test. This test consists of download a simple Docker image then running Docker with this image.
+A way to check that Docker is working is to run the "hello world" test. This test consists of downloading a simple Docker image then running Docker with this image.
 
 > sudo docker run hello-world
 
@@ -230,3 +230,95 @@ For more examples and ideas, visit:
 
 [root@centos7 ~]#
 ```
+
+Since the container did not exists the image of the container  has been downloaded. We can see it in the image list of Docker.
+
+``` shell
+[root@centos7 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+[root@centos7 ~]#
+```
+
+## 4. Usefull commands
+
+### 4.1 Get Docker currently installed version
+
+> docker --version
+
+``` shell
+[root@centos7 ~]# docker --version
+Docker version 18.09.6, build 481bc77156
+[root@centos7 ~]#
+```
+
+### 4.2 Get Docker information (number of images, containers, etc.)
+
+> docker info
+
+``` shell
+[root@centos7 ~]# docker info
+Containers: 1
+ Running: 0
+ Paused: 0
+ Stopped: 1
+Images: 1
+Server Version: 18.09.6
+Storage Driver: overlay2
+ Backing Filesystem: xfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: bb71b10fd8f58240ca47fbb579b9d1028eea7c84
+runc version: 2b18fe1d885ee5083ef9f0838fee39b62d653e30
+init version: fec3683
+Security Options:
+ seccomp
+  Profile: default
+Kernel Version: 3.10.0-957.12.2.el7.x86_64
+Operating System: CentOS Linux 7 (Core)
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 3.701GiB
+Name: centos7
+ID: VKLJ:6VVK:YXH5:5RUP:PTDJ:C4FB:T7MJ:6YEX:JDC4:2QUL:LDI3:2PXD
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Labels:
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+Product License: Community Engine
+
+[root@centos7 ~]#
+```
+
+### 4.23 List images
+
+> docker images
+
+or
+
+> docker image ls
+
+
+``` shell
+[root@centos7 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+[root@centos7 ~]#
+```
+
