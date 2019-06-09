@@ -2,11 +2,11 @@
 
 Here are a couple of commands to install Docker Community Edition (CE) on Centos 7.
 
-## Install docker CE
+## Install Docker CE
 
 ### 1. Repository update
 
-2 commands to use.
+2 commands to use to update the repository first.
 
 >  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
@@ -37,6 +37,8 @@ repo saved to /etc/yum.repos.d/docker-ce.repo
 ```
 
 ### 2. Now program installation
+
+Here is the installation command to have Docer working on the Linux host.
 
 > sudo yum install docker-ce docker-ce-cli containerd.io
 
