@@ -349,3 +349,36 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 bd64f9376534        hello-world         "/hello"            18 minutes ago      Exited (0) 18 minutes ago                       compassionate_rubin
 [root@centos7 ~]#
 ```
+
+### 4.5 Delete a container
+
+> docker container rm *container_id*
+
+``` shell
+[root@centos7 ~]# docker container ls -all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+bd64f9376534        hello-world         "/hello"            42 minutes ago      Exited (0) 42 minutes ago                       compassionate_rubin
+[root@centos7 ~]# docker container rm bd64f9376534
+bd64f9376534
+[root@centos7 ~]# docker container ls -all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@centos7 ~]#
+```
+
+### 4.6 Delete an image
+
+> docker image rm *image_id*
+
+``` shell
+[root@centos7 ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        5 months ago        1.84kB
+[root@centos7 ~]# docker image rm fce289e99eb9
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:0e11c388b664df8a27a901dce21eb89f11d8292f7fca1b3e3c4321bf7897bffe
+Deleted: sha256:fce289e99eb9bca977dae136fbe2a82b6b7d4c372474c9235adc1741675f587e
+Deleted: sha256:af0b15c8625bb1938f1d7b17081031f649fd14e6b233688eea3c5483994a66a3
+[root@centos7 ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+[root@centos7 ~]#
+```
