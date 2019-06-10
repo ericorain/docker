@@ -8,7 +8,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 >   * [1.1 Repository update](#11-Repository-update)
 >   * [1.2 Docker installation command](#12-Docker-installation-command)
 > * [2. Uninstall Docker CE](#2-Uninstall-Docker-CE)
-> * [3. Testing Docker is running](#3-Testing-Docker-is-running)
+> * [3. Docker status and running Docker](#3-Docker-status-and-running-Docker)
 > * [4. Usefull commands](#4-Usefull-commands)
 >   * [4.1 Get Docker currently installed version](#41-Get-Docker-currently-installed-version)
 >   * [4.2 Get Docker information (number of images, containers, etc.)](#42-Get-Docker-information-number-of-images-containers-etc)
@@ -18,6 +18,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 >   * [4.6 Import a Docker image](#46-Import-a-Docker-image)
 >   * [4.7 Delete a container](#47-Delete-a-container)
 >   * [4.8 Delete an image](#48-Delete-an-image)
+>   * [4.9 Get the space used by images, volumes and containers](#4.9-Get-the-space-used-by-images-volumes-and-containers)
 > * [5. Running a container](#5-Running-a-container)
 >   * [5.1 Running and exiting immediately](#51-Running-and-exiting-immediately)
 >   * [5.2 Running and keep it running](#52-Running-and-keep-it-running)
@@ -164,7 +165,7 @@ Terminé !
 [root@centos7 ~]#
 ```
 
-## 3. Testing Docker is running
+## 3. Docker status and running Docker
 
 Let's check if the service is running.
 
@@ -440,6 +441,20 @@ Deleted: sha256:af0b15c8625bb1938f1d7b17081031f649fd14e6b233688eea3c5483994a66a3
 [root@centos7 ~]# docker image ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 [root@centos7 ~]#
+```
+
+### 4.9 Get the space used by images, volumes and containers
+
+> docker system df
+
+``` shell
+[root@centos7 netbox-docker]# docker system df
+TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
+Images              4                   4                   641.3MB             5.533MB (0%)
+Containers          5                   0                   3.502MB             3.502MB (100%)
+Local Volumes       6                   5                   84.34MB             0B (0%)
+Build Cache         0                   0                   0B                  0B
+[root@centos7 netbox-docker]#
 ```
 
 ## 5. Running a container
