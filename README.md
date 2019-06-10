@@ -425,6 +425,35 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 [root@centos7 ~]#
 ```
 
+It is also possible to remove all stopped containers.
+
+> docker container prune
+
+``` shell
+[root@centos7 netbox-docker]# docker container ls -a
+CONTAINER ID        IMAGE                           COMMAND                  CREATED             STATUS                           PORTS                             NAMES
+4cc5187edfc9        nginx:1.15-alpine               "nginx -c /etc/netbo…"   14 hours ago        Exited (255) About an hour ago   80/tcp, 0.0.0.0:32768->8080/tcp   netbox-docker_nginx_1
+34cbc60c7948        netboxcommunity/netbox:latest   "/opt/netbox/docker-…"   14 hours ago        Exited (255) About an hour ago                                     netbox-docker_netbox_1
+3c9bd93bc71d        netboxcommunity/netbox:latest   "python3 /opt/netbox…"   14 hours ago        Exited (255) About an hour ago                                     netbox-docker_netbox-worker_1
+16f134d325dc        postgres:10.4-alpine            "docker-entrypoint.s…"   14 hours ago        Exited (255) About an hour ago   5432/tcp                          netbox-docker_postgres_1
+ca04b0b4a491        redis:4-alpine                  "docker-entrypoint.s…"   14 hours ago        Exited (255) About an hour ago   6379/tcp                          netbox-docker_redis_1
+[root@centos7 netbox-docker]#
+[root@centos7 netbox-docker]# docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+4cc5187edfc9fe029062bb162d168055df9fafa94d137edda0a340226bd49bfd
+34cbc60c794869285a5dee745d869e2886a8c79b87c896cfca9e94d8bd35c1d6
+3c9bd93bc71dd45630d44521c8f06a4e3f8c6f032010d489e7b2001d83ee3c11
+16f134d325dc5b72f5f9cee59f1ee5ee68ece6832b48caed8099189d7e28c18e
+ca04b0b4a491f3270e003c330f119b71d4fcff37325a0a0c78ceda33c16653e6
+
+Total reclaimed space: 3.502MB
+[root@centos7 netbox-docker]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@centos7 netbox-docker]#
+```
+
 ### 4.8 Delete an image
 
 > docker image rm *image_id*
