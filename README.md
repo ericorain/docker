@@ -18,7 +18,7 @@ Here are a couple of commands to install Docker Community Edition (CE) on Centos
 >   * [4.6 Import a Docker image](#46-Import-a-Docker-image)
 >   * [4.7 Delete a container](#47-Delete-a-container)
 >   * [4.8 Delete an image](#48-Delete-an-image)
->   * [4.9 Get the space used by images, volumes and containers](#4.9-Get-the-space-used-by-images-volumes-and-containers)
+>   * [4.9 Get the space used by images, volumes and containers](#49-Get-the-space-used-by-images-volumes-and-containers)
 > * [5. Running a container](#5-Running-a-container)
 >   * [5.1 Running and exiting immediately](#51-Running-and-exiting-immediately)
 >   * [5.2 Running and keep it running](#52-Running-and-keep-it-running)
